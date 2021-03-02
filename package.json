@@ -43,10 +43,65 @@
                     "type": "string",
                     "default": "calculate"
                 },
-                "markdown.calculator.exceptionColor": {
-                    "description": "Text color for the rendering of an exception text",
+                "markdown.calculator.cssClass.exception": {
+                    "description": "CSS class name for exception text rendering",
                     "type": "string",
-                    "default": "red"
+                    "default": "calculator-exception"
+                },
+                "markdown.calculator.cssClass.return": {
+                    "description": "CSS class name for calculation return value",
+                    "type": "string",
+                    "default": "calculator-return"
+                },
+                "markdown.calculator.cssClass.console.assert": {
+                    "description": "CSS class name for console.assert",
+                    "type": "string",
+                    "default": "calculator-console-assert"
+                },
+                "markdown.calculator.cssClass.console.debug": {
+                    "description": "CSS class name for console.debug",
+                    "type": "string",
+                    "default": "calculator-console-debug"
+                },
+                "markdown.calculator.cssClass.console.dir": {
+                    "description": "CSS class name for console.dir",
+                    "type": "string",
+                    "default": "calculator-console-dir"
+                },
+                "markdown.calculator.cssClass.console.error": {
+                    "description": "CSS class name for console.error",
+                    "type": "string",
+                    "default": "calculator-console-error"
+                },
+                "markdown.calculator.cssClass.console.info": {
+                    "description": "CSS class name for console.info",
+                    "type": "string",
+                    "default": "calculator-console-info"
+                },
+                "markdown.calculator.cssClass.console.log": {
+                    "description": "CSS class name for console.log",
+                    "type": "string",
+                    "default": "calculator-console-log"
+                },
+                "markdown.calculator.cssClass.console.time": {
+                    "description": "CSS class name for console.time",
+                    "type": "string",
+                    "default": "calculator-console-time"
+                },
+                "markdown.calculator.cssClass.console.timeEnd": {
+                    "description": "CSS class name for console.timeEnd",
+                    "type": "string",
+                    "default": "calculator-console-timeEnd"
+                },
+                "markdown.calculator.cssClass.console.timeLog": {
+                    "description": "CSS class name for console.timeLog",
+                    "type": "string",
+                    "default": "calculator-console-timeLog"
+                },
+                "markdown.calculator.cssClass.console.warn": {
+                    "description": "CSS class name for console.warn",
+                    "type": "string",
+                    "default": "calculator-console-warn"
                 }
             }
         }

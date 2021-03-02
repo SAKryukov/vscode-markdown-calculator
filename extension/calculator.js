@@ -8,9 +8,9 @@ module.exports = (md, settings) => {
             const f = Function("", body);
             value = f();
         } catch (ex) {
-            return(`<p style="color:${settings.exceptionColor}">${ex.toString()}</p>`);
+            return(`<p class="${settings.cssClass.exception}">${ex.toString()}</p>`);
         }
-        return(`<p>Result: ${value}</p>`);
+        return(`<p class="${settings.cssClass.return}">Result: ${value}</p>`);
     }; //
 
     const renderDefault = (tokens, index, options, object, renderer, previousHandler) => {

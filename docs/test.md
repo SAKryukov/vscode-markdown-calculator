@@ -1,5 +1,6 @@
 ## Heading 1
 
+In-document calculations:
 ``` calculate
    const x = 1;
    const y = 12;

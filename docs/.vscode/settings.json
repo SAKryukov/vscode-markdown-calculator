@@ -1,0 +1,7 @@
+{
+    "markdown.styles": [
+        "style.css"
+    ],
+    "markdown.calculator.enable": true,
+    "markdown.calculator.cssClass.exception": "calculator-exception"
+}
