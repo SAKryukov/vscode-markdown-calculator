@@ -41,7 +41,7 @@
                 "markdown.calculator.calculateIndicator": {
                     "description": "Fence markup used to indicate calculation instead of regular rendering",
                     "type": "string",
-                    "default": "calculate"
+                    "default": "run"
                 },
                 "markdown.calculator.cssClass.exception": {
                     "description": "CSS class name for exception text rendering",

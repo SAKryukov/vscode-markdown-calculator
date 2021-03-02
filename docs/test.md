@@ -1,7 +1,7 @@
 ## Heading 1
 
 In-document calculations:
-``` calculate
+``` run
    const x = 1;
    const y = 12; 
    console.log(x + y);
