@@ -42,7 +42,7 @@ module.exports = (md, settings) => {
             for (let line of this.lines) {
                 let renderedLine = "";
                 for (let element of line.elements)
-                    renderedLine += `${element.toString()} `;
+                    renderedLine += `${element} `;
                 renderedLine = renderedLine.trim();
                 result += `<p class="${line.cssClass}">${renderedLine}</p>`;
             }; //loop
@@ -55,8 +55,11 @@ module.exports = (md, settings) => {
     const console = consoleApi.initialize();
 
     const safeFunctionBody = body => {
-        return `
-            \n${body}`;
+        const safeGlobals =
+            "document = null," +
+            "window = null, navigator = null," +
+            "globalThis = {console: console};";
+        return `${safeGlobals}\n${body}`;
     }; //safeFunctionBody
 
     const renderFunction = body => {
