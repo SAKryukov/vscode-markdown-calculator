@@ -59,7 +59,8 @@ module.exports = (md, settings) => {
             const f = Function("console", safeFunctionBody(body));
             value = f(console);
             const consoleResults = consoleApi.render();
-            return(`${consoleResults}<p class="${settings.cssClass.return}">Result: ${value}</p>`);            
+            if (value == undefined) value = "";
+            return(`${consoleResults}<p class="${settings.cssClass.return}">${value}</p>`);            
         } catch (ex) {
             return(`<p class="${settings.cssClass.exception}">${ex.toString()}</p>`);
         } finally {
