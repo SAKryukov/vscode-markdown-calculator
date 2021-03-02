@@ -74,7 +74,7 @@ module.exports = (md, settings) => {
 
     const previousRender = md.renderer.rules.fence;
     md.renderer.rules.fence = (tokens, index, ruleOptions, object, renderer) => {
-        if (settings.enable && tokens[index].info.trim() == settings.calculateIndicator)
+        if (settings.enable && tokens[index].info.trim() == settings.executionIndicator)
             return `${renderFunction(tokens[index].content)}`;
         else
             return renderDefault(tokens, index, ruleOptions, object, renderer, previousRender);

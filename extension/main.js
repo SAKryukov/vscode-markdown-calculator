@@ -42,24 +42,25 @@ exports.activate = context => {
             document.positionAt(start),
             document.positionAt(start + length));
     }; //getVSCodeRange
-    const decoratorType = vscode.window.createTextEditorDecorationType({
-        backgroundColor: "yellow"
-    });
 
     const getAllMatches = (document, text) => {
-        const length = lazy.settings.calculateIndicator.length;
+        const length = lazy.settings.executionIndicator.length;
         const prefix = "^\\`\\`\\`[\\s]*";
-        const regex = new RegExp(`${prefix}(${lazy.settings.calculateIndicator})`, "mgi");
+        const regex = new RegExp(`${prefix}(${lazy.settings.executionIndicator})`, "mgi");
         const list = [];
         let result;
         while (result = regex.exec(text))
-            list.push(getVSCodeRange(document, result.index + result[0].length - result[1].length, length));
+            list.push({
+                range: getVSCodeRange(document, result.index + result[0].length - result[1].length, length),
+                hoverMessage: lazy.settings.keywordDecorator.hoverText,
+            });
         return list;
     }; //getAllMatches
 
     const updateDecorators = () => {
         if (!lazy.settings)
             lazy.settings = getSettings();
+        const decoratorType = vscode.window.createTextEditorDecorationType({ backgroundColor: lazy.settings.keywordDecorator.color });
         const document = vscode.window.activeTextEditor.document;
         const text = vscode.window.activeTextEditor.document.getText();
         vscode.window.activeTextEditor.setDecorations(decoratorType, getAllMatches(document, text));

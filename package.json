@@ -38,10 +38,20 @@
                     "type": "boolean",
                     "default": true
                 },
-                "markdown.calculator.calculateIndicator": {
-                    "description": "Fence markup used to indicate calculation instead of regular rendering",
+                "markdown.calculator.executionIndicator": {
+                    "description": "Fence markup used to indicate execution of code instead of regular rendering",
                     "type": "string",
                     "default": "run"
+                },
+                "markdown.calculator.keywordDecorator.color": {
+                    "description": "Background color to highlight the executionIndicator",
+                    "type": "string",
+                    "default": "yellow"
+                },
+                "markdown.calculator.keywordDecorator.hoverText": {
+                    "description": "Hover text showing the purpose of the keyword executionIndicator",
+                    "type": "string",
+                    "default": "This keyword forces fenced code block to execute code instead of showing it"
                 },
                 "markdown.calculator.cssClass.exception": {
                     "description": "CSS class name for exception text rendering",
@@ -49,7 +59,7 @@
                     "default": "calculator-exception"
                 },
                 "markdown.calculator.cssClass.return": {
-                    "description": "CSS class name for calculation return value",
+                    "description": "CSS class name for the calculation return value",
                     "type": "string",
                     "default": "calculator-return"
                 },
