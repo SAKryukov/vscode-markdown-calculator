@@ -12,7 +12,7 @@ module.exports = (md, settings) => {
         initialize: function() {
             const handleArguments = (elements, cssClass) => {
                 this.lines.push({elements: elements, cssClass: cssClass});
-            }; // 
+            }; //
             const console = {
                 assert: (assertion, ...args) => {
                     if (!assertion)
