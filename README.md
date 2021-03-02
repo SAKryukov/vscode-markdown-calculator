@@ -11,5 +11,7 @@ It will force the code to execute instead of rendering it:
 ```
 ````
 
-The execution result will be rendered instead of the source code. The `console` functions are supported.
+The execution result will be rendered instead of the source code. The `console` functions are supported. The syntax and syntactic decorators are configurable.
+
+This extension can be combined with other markdown-it extensions. In particular, the rendered HTML can be saved using [Extensible Markdown](https://github.com/SAKryukov/vscode-extensible-markdown).
 
