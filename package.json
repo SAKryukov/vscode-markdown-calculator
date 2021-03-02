@@ -33,10 +33,20 @@
             "type": "object",
             "title": "Markdown Calculator",
             "properties": {
-                "markdown.markdownCalculator.enable": {
-                    "description": "Upon successful conversion to HTML file, show it in the default Web browser",
+                "markdown.calculator.enable": {
+                    "description": "Enable Markdown Calculator",
                     "type": "boolean",
                     "default": true
+                },
+                "markdown.calculator.calculateIndicator": {
+                    "description": "Fence markup used to indicate calculation instead of regular rendering",
+                    "type": "string",
+                    "default": "calculate"
+                },
+                "markdown.calculator.exceptionColor": {
+                    "description": "Text color for the rendering of an exception text",
+                    "type": "string",
+                    "default": "red"
                 }
             }
         }

@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = (md, options) => {
+module.exports = (md, settings) => {
 
     const renderFunction = body => {
         let value = undefined;
@@ -8,24 +8,22 @@ module.exports = (md, options) => {
             const f = Function("", body);
             value = f();
         } catch (ex) {
-            return(`<p style="color:red">${ex.toString()}</p>`);
+            return(`<p style="color:${settings.exceptionColor}">${ex.toString()}</p>`);
         }
         return(`<p>Result: ${value}</p>`);
     }; //
 
-    const renderDefault = (tokens, index, options, object, renderer, previousHandler, defaultHtml) => {
+    const renderDefault = (tokens, index, options, object, renderer, previousHandler) => {
         if (previousHandler)
             return(previousHandler(tokens, index, options, object, renderer))
-        else
-            return defaultHtml;
     }; //renderDefault
 
     const previousRender = md.renderer.rules.fence;
     md.renderer.rules.fence = (tokens, index, ruleOptions, object, renderer) => {
-        if (tokens[index].info.trim() == "@calculate")
+        if (settings.enable && tokens[index].info.trim() == settings.calculateIndicator)
             return `${renderFunction(tokens[index].content)}`;
         else
             return renderDefault(tokens, index, ruleOptions, object, renderer, previousRender);
-    }; //md.renderer.paragraph_open
+    }; //md.renderer.rules.fence
 
 }; //module.exports
