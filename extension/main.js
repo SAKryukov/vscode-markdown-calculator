@@ -7,7 +7,6 @@ const setContextCommand = "setContext"; // not documented in VSCode API document
 exports.activate = context => {
 
     const lazy = { lastErrorChannel: null, settings: undefined };
-
     
     const vscode = require("vscode");
     const calculator = require("./calculator");
