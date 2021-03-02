@@ -45,13 +45,13 @@ exports.activate = context => {
 
     const getAllMatches = (document, text) => {
         const length = lazy.settings.executionIndicator.length;
-        const prefix = "^\\`\\`\\`[\\s]*";
+        const prefix = "^(`{3,}|~3,})[\\s]*";
         const regex = new RegExp(`${prefix}(${lazy.settings.executionIndicator})`, "mgi");
         const list = [];
         let result;
         while (result = regex.exec(text))
             list.push({
-                range: getVSCodeRange(document, result.index + result[0].length - result[1].length, length),
+                range: getVSCodeRange(document, result.index + result[0].length - result[2].length, length),
                 hoverMessage: lazy.settings.keywordDecorator.hoverText,
             });
         return list;
@@ -60,10 +60,12 @@ exports.activate = context => {
     const updateDecorators = () => {
         if (!lazy.settings)
             lazy.settings = getSettings();
-        const decoratorType = vscode.window.createTextEditorDecorationType({ backgroundColor: lazy.settings.keywordDecorator.color });
+        if (lazy.decoratorType)
+            lazy.decoratorType.dispose();
+        lazy.decoratorType = vscode.window.createTextEditorDecorationType({ backgroundColor: lazy.settings.keywordDecorator.color });
         const document = vscode.window.activeTextEditor.document;
         const text = vscode.window.activeTextEditor.document.getText();
-        vscode.window.activeTextEditor.setDecorations(decoratorType, getAllMatches(document, text));
+        vscode.window.activeTextEditor.setDecorations(lazy.decoratorType, getAllMatches(document, text));
     }; //updateDecorators
     updateDecorators();
 
