@@ -3,12 +3,16 @@
 const debugActivationException = false;
 const customContextConditionName = "MarkdownReady";
 const setContextCommand = "setContext"; // not documented in VSCode API documentation
+const extensionManifestFileName = "package.json";
 
 exports.activate = context => {
 
     const lazy = { lastErrorChannel: null, settings: undefined };
     
     const vscode = require("vscode");
+    const path = require("path");
+    const fs = require("fs");
+
     const calculator = require("./calculator");
 
     const getSettings = () => {
@@ -21,8 +25,8 @@ exports.activate = context => {
             const pathName = path.join(context.extensionPath, extensionManifestFileName);
             const content = fs.readFileSync(pathName).toString();
             return JSON.parse(content);
-        } //getManifest            
-        vscode.window.showErrorMessage(`${getManifest().displayName}: activation failed`);
+        } //getManifest
+        vscode.window.showErrorMessage(`${getManifest().displayName}: activation failed: ${ex.message}`);
         if (lazy.lastErrorChannel)
             lazy.lastErrorChannel.clear();
         else
@@ -65,7 +69,9 @@ exports.activate = context => {
                 md.use(calculator, lazy.settings);
                 vscode.commands.executeCommand(setContextCommand, customContextConditionName, true);
                 return md;
-            } catch (ex) { activationExceptionHandler(ex); }
+            } catch (ex) {
+                activationExceptionHandler(ex);
+            } //exception
         }
     };
 
