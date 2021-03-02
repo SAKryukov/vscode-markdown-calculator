@@ -3,9 +3,11 @@
 module.exports = (md, options) => {
 
     const functionMap = new Map();
-    const functionRegexp = new RegExp(/\@\{(.*?)\}/, "gm");
+    const functionRegexp = new RegExp(/\@calculate\{(.*)\}/, "sgm");
 
-    const test = functionRegexp.exec("@{a\naa}");
+    const test1 = functionRegexp.exec("@{a\naa}");
+    const test2 = functionRegexp.exec("@{ade dwe dwe  dwedewfsaa}");
+    const test3 = null;
 
     md.core.ruler.after("block", "collectFunctions", state => {
         for (let index = 0; index < state.tokens.length; ++index) {
