@@ -23,15 +23,6 @@ module.exports = (md, settings) => {
                 error: (...args) => { handleArguments(args, settings.cssClass.console.error); },
                 info: (...args) => { handleArguments(args, settings.cssClass.console.info); },
                 log: (...args) => { handleArguments(args, settings.cssClass.console.log); },
-                time: label => {
-                    //SA???
-                },
-                timeEnd: label => {
-                    //SA???
-                },
-                timeLog: label => {
-                    //SA???
-                },
                 warn: (...args) => { handleArguments(args, settings.cssClass.console.warn); },
             }; //console
             return setReadonly(console);
