@@ -1,11 +1,10 @@
 "use strict";
 
-const debugActivationException = false;
-const customContextConditionName = "MarkdownReady";
-const setContextCommand = "setContext"; // not documented in VSCode API documentation
-const extensionManifestFileName = "package.json";
-
 exports.activate = context => {
+
+    const debugActivationException = false;
+    const extensionManifestFileName = "package.json";
+    const markdownId = "markdown";
 
     const lazy = { lastErrorChannel: null, settings: undefined };
     
@@ -17,7 +16,7 @@ exports.activate = context => {
 
     const getSettings = () => {
         const configuration = vscode.workspace.getConfiguration();
-        return configuration.markdown.calculator;    
+        return configuration.markdown.calculator;
     }; //getSettings
 
     const activationExceptionHandler = ex => {
@@ -38,8 +37,32 @@ exports.activate = context => {
         lazy.lastErrorChannel.appendLine(ex.stack);
     }; //activationExceptionHandler
 
+    const getVSCodeRange = (document, start, length) => {
+        return new vscode.Range(
+            document.positionAt(start),
+            document.positionAt(start + length));
+    }; //getVSCodeRange
+    const decoratorType = vscode.window.createTextEditorDecorationType({
+        backgroundColor: "yellow"
+    });
+
+    const getAllMatches = (document, text) => {
+        const length = lazy.settings.calculateIndicator.length;
+        const prefix = "^\\`\\`\\`[\\s]*";
+        const regex = new RegExp(`${prefix}(${lazy.settings.calculateIndicator})`, "mgi");
+        const list = [];
+        let result;
+        while (result = regex.exec(text))
+            list.push(getVSCodeRange(document, result.index + result[0].length - result[1].length, length));
+        return list;
+    }; //getAllMatches
+
     const updateDecorators = () => {
-        //SA???
+        if (!lazy.settings)
+            lazy.settings = getSettings();
+        const document = vscode.window.activeTextEditor.document;
+        const text = vscode.window.activeTextEditor.document.getText();
+        vscode.window.activeTextEditor.setDecorations(decoratorType, getAllMatches(document, text));
     }; //updateDecorators
     updateDecorators();
 
@@ -67,7 +90,6 @@ exports.activate = context => {
                     lazy.settings = getSettings();
                 const md = baseImplementation;
                 md.use(calculator, lazy.settings);
-                vscode.commands.executeCommand(setContextCommand, customContextConditionName, true);
                 return md;
             } catch (ex) {
                 activationExceptionHandler(ex);
