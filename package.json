@@ -83,21 +83,6 @@
                     "type": "string",
                     "default": "calculator-console-log"
                 },
-                "markdown.calculator.cssClass.console.time": {
-                    "description": "CSS class name for console.time",
-                    "type": "string",
-                    "default": "calculator-console-time"
-                },
-                "markdown.calculator.cssClass.console.timeEnd": {
-                    "description": "CSS class name for console.timeEnd",
-                    "type": "string",
-                    "default": "calculator-console-timeEnd"
-                },
-                "markdown.calculator.cssClass.console.timeLog": {
-                    "description": "CSS class name for console.timeLog",
-                    "type": "string",
-                    "default": "calculator-console-timeLog"
-                },
                 "markdown.calculator.cssClass.console.warn": {
                     "description": "CSS class name for console.warn",
                     "type": "string",

@@ -20,10 +20,7 @@
         .calculator-console-debug,
         .calculator-console-dir,
         .calculator-console-info,
-        .calculator-console-log,
-        .calculator-console-time,
-        .calculator-console-timeEnd,
-        .calculator-console-timeLog { color: navy; }
+        .calculator-console-log: { color: navy; }
         .calculator-console-error { color: red; }
-        .calculator-console-warn { color: darkRed; }
+        .calculator-console-warn { color: brown; }
 

@@ -2,15 +2,75 @@
 
 module.exports = (md, settings) => {
 
+    const setReadonly = target => {
+        const readonlyHandler = { set(obj, prop, value) { return false; } };
+        return new Proxy(target, readonlyHandler);
+    }; //setReadonly    
+
+    const consoleApi = {
+        lines: [],
+        initialize: function() {
+            const handleArguments = (elements, cssClass) => {
+                this.lines.push({elements: elements, cssClass: cssClass});
+            }; // 
+            const console = {
+                assert: (assertion, ...args) => {
+                    if (!assertion)
+                        handleArguments(args, settings.cssClass.console.assert);
+                },
+                debug: (...args) => { handleArguments(args, settings.cssClass.console.debug); },
+                dir: (...args) => { handleArguments(args, settings.cssClass.console.dir); },
+                error: (...args) => { handleArguments(args, settings.cssClass.console.error); },
+                info: (...args) => { handleArguments(args, settings.cssClass.console.info); },
+                log: (...args) => { handleArguments(args, settings.cssClass.console.log); },
+                time: label => {
+                    //SA???
+                },
+                timeEnd: label => {
+                    //SA???
+                },
+                timeLog: label => {
+                    //SA???
+                },
+                warn: (...args) => { handleArguments(args, settings.cssClass.console.warn); },
+            }; //console
+            return setReadonly(console);
+        },
+        render: function() {
+            let result = "";
+            if (this.lines.length < 1) return result;
+            for (let line of this.lines) {
+                let renderedLine = "";
+                for (let element of line.elements)
+                    renderedLine += `${element.toString()} `;
+                renderedLine = renderedLine.trim();
+                result += `<p class="${line.cssClass}">${renderedLine}</p>`;
+            }; //loop
+            return result;
+        },
+        clear: function() {
+            this.lines.splice(0);
+        },
+    }; //console
+    const console = consoleApi.initialize();
+
+    const safeFunctionBody = body => {
+        return `
+            \n${body}`;
+    }; //safeFunctionBody
+
     const renderFunction = body => {
         let value = undefined;
         try {
-            const f = Function("", body);
-            value = f();
+            const f = Function("console", safeFunctionBody(body));
+            value = f(console);
+            const consoleResults = consoleApi.render();
+            return(`${consoleResults}<p class="${settings.cssClass.return}">Result: ${value}</p>`);            
         } catch (ex) {
             return(`<p class="${settings.cssClass.exception}">${ex.toString()}</p>`);
-        }
-        return(`<p class="${settings.cssClass.return}">Result: ${value}</p>`);
+        } finally {
+            consoleApi.clear();
+        } //exception
     }; //
 
     const renderDefault = (tokens, index, options, object, renderer, previousHandler) => {
