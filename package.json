@@ -1,0 +1,47 @@
+{
+    "name": "vscode-markdown-calculator",
+    "displayName": "VSCode Markdown Calculator",
+    "description": "Visual Studio Code extension: Markdown Calculator",
+    "version": "0.0.1",
+    "publisher": "sakryukov",
+    "author": {
+        "name": "Sergey A Kryukov",
+        "url": "http://www.SAKryukov.org"
+    },
+    "license": "MIT",
+    "icon": "images/logo.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SAKryukov/vscode-extensible-markdown.git"
+    },
+    "engines": {
+        "vscode": ">=1.40.2"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "markdown", "JavaScript", "calculator"
+    ],
+    "activationEvents": [
+        "onLanguage:markdown"
+    ],
+    "main": "./extension/main.js",
+    "contributes": {
+        "markdown.markdownItPlugins": true,
+        "configuration": {
+            "type": "object",
+            "title": "Markdown Calculator",
+            "properties": {
+                "markdown.markdownCalculator.enable": {
+                    "description": "Upon successful conversion to HTML file, show it in the default Web browser",
+                    "type": "boolean",
+                    "default": true
+                }
+            }
+        }
+    },
+    "__metadata": {
+        "publisherDisplayName": "Sergey A Kryukov"
+    }
+}
