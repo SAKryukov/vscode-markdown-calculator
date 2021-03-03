@@ -45,7 +45,7 @@ exports.activate = context => {
 
     const getAllMatches = (document, text) => {
         const length = lazy.settings.executionIndicator.length;
-        const prefix = "^(`{3,}|~3,})[\\s]*";
+        const prefix = "^(`{3,}|~{3,})[\\s]*";
         const regex = new RegExp(`${prefix}(${lazy.settings.executionIndicator})`, "mgi");
         const list = [];
         let result;
