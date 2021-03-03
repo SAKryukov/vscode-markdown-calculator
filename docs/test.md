@@ -1,12 +1,17 @@
-## Heading 1
+## Calculate, not Show
 
 In-document calculations:
 
 ~~~~~~~~~~ run
-   const x = 1;
-   const y = 12; 
-   console.log(x + y);
+   const x = 3;
+   const y = 2; 
+   console.log(x / y);
+   console.log("Return value:");
    return x + y + "%";
 ~~~~~~~~~~
 
-### Heading 1.1
+### Calculate More
+
+``` run
+   console.log(Math.PI, Math.cos(Math.PI));
+```
