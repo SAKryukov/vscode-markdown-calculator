@@ -7,7 +7,7 @@ In-document calculations:
    const y = 2; 
    console.log(x / y);
    console.log("Return value:");
-   return x + y + "%";
+   return x * y;
 ~~~~~~~~~~
 
 ### Calculate More
