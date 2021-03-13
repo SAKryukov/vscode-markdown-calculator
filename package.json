@@ -38,6 +38,16 @@
                     "type": "boolean",
                     "default": true
                 },
+                "markdown.calculator.fencedCodeBlock.enable": {
+                    "description": "Enable modification of fenced code block behavior with Markdown Calculator",
+                    "type": "boolean",
+                    "default": true
+                },
+                "markdown.calculator.inlineCode.enable": {
+                    "description": "Enable modification of inline behavior with Markdown Calculator",
+                    "type": "boolean",
+                    "default": true
+                },
                 "markdown.calculator.executionIndicator": {
                     "description": "Fence markup used to indicate execution of code instead of regular rendering",
                     "type": "string",

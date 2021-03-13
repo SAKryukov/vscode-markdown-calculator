@@ -43,10 +43,11 @@ exports.activate = context => {
             document.positionAt(start + length));
     }; //getVSCodeRange
 
-    const getAllMatches = (document, text) => {
+    const getAllMatches = (document, text, isBlock) => {
         const length = lazy.settings.executionIndicator.length;
-        const prefix = "^(`{3,}|~{3,})[\\s]*";
-        const regex = new RegExp(`${prefix}(${lazy.settings.executionIndicator})`, "mgi");
+        const prefix = isBlock ? "^(`{3,}|~{3,})[\\s]*" : "(`[\\s]*)";
+        const regex =
+            new RegExp(`${prefix}(${lazy.settings.executionIndicator})`, "mgi") 
         const list = [];
         let result;
         while (result = regex.exec(text))
@@ -62,10 +63,23 @@ exports.activate = context => {
             lazy.settings = getSettings();
         if (lazy.decoratorType)
             lazy.decoratorType.dispose();
-        lazy.decoratorType = vscode.window.createTextEditorDecorationType({ backgroundColor: lazy.settings.keywordDecorator.color });
+        if (!lazy.settings.enable)
+            return;
+        if (!(lazy.settings.fencedCodeBlock.enable || lazy.settings.inlineCode.enable))
+            return;
+        let matches = [];
         const document = vscode.window.activeTextEditor.document;
         const text = vscode.window.activeTextEditor.document.getText();
-        vscode.window.activeTextEditor.setDecorations(lazy.decoratorType, getAllMatches(document, text));
+        if (lazy.settings.fencedCodeBlock.enable) {
+            const blockMatches = getAllMatches(document, text, true);
+            matches = matches.concat(blockMatches);
+        } //if
+        if (lazy.settings.inlineCode.enable) {
+            const inlineMatches = getAllMatches(document, text, false);
+            matches = matches.concat(inlineMatches);
+        } //if
+        lazy.decoratorType = vscode.window.createTextEditorDecorationType({ backgroundColor: lazy.settings.keywordDecorator.color });
+        vscode.window.activeTextEditor.setDecorations(lazy.decoratorType, matches);
     }; //updateDecorators
     updateDecorators();
 
@@ -92,7 +106,12 @@ exports.activate = context => {
                 if (!lazy.settings)
                     lazy.settings = getSettings();
                 const md = baseImplementation;
-                md.use(calculator, lazy.settings);
+                if (lazy.settings.enable) {
+                    if (lazy.settings.fencedCodeBlock.enable)
+                        md.use(calculator, lazy.settings);
+                    if (lazy.settings.inlineCode.enable)
+                        ;
+                } //if
                 return md;
             } catch (ex) {
                 activationExceptionHandler(ex);

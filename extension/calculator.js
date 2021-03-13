@@ -45,40 +45,56 @@ module.exports = (md, settings) => {
     }; //console
     const console = consoleApi.initialize();
 
-    const safeFunctionBody = body => {
+    const safeFunctionBody = (body, inline) => {
+        const inlinePrefix = inline ? "\nreturn ": "\n";
         const safeGlobals =
-            "document = null," +
+            "const document = null," +
             "window = null, navigator = null," +
             "globalThis = {console: console};";
-        return `${safeGlobals}\n${body}`;
+        return `${safeGlobals}${inlinePrefix}${body}`;
     }; //safeFunctionBody
 
-    const renderFunction = body => {
+    const renderFunction = (body, inline) => {
         let value = undefined;
         try {
-            const f = Function("console", safeFunctionBody(body));
+            const safeBody = safeFunctionBody(body, inline);
+            const f = Function("console", safeBody);
             value = f(console);
             const consoleResults = consoleApi.render();
             if (value == undefined) value = "";
-            return(`${consoleResults}<p class="${settings.cssClass.return}">${value}</p>`);            
+            const result = inline ?
+                value
+                :
+                `${consoleResults}<p class="${settings.cssClass.return}">${value}</p>`
+            return(result);
         } catch (ex) {
             return(`<p class="${settings.cssClass.exception}">${ex.toString()}</p>`);
         } finally {
             consoleApi.clear();
         } //exception
-    }; //
+    }; //renderFunction
 
     const renderDefault = (tokens, index, options, object, renderer, previousHandler) => {
         if (previousHandler)
             return(previousHandler(tokens, index, options, object, renderer))
     }; //renderDefault
 
-    const previousRender = md.renderer.rules.fence;
+    const previousFenceRenderer = md.renderer.rules.fence;
     md.renderer.rules.fence = (tokens, index, ruleOptions, object, renderer) => {
-        if (settings.enable && tokens[index].info.trim() == settings.executionIndicator)
+        if (settings.enable && settings.fencedCodeBlock.enable && tokens[index].info.trim() == settings.executionIndicator)
             return `${renderFunction(tokens[index].content)}`;
         else
-            return renderDefault(tokens, index, ruleOptions, object, renderer, previousRender);
+            return renderDefault(tokens, index, ruleOptions, object, renderer, previousFenceRenderer);
     }; //md.renderer.rules.fence
+
+    const previousInlineCodeRenderer = md.renderer.rules.code_inline;
+    md.renderer.rules.code_inline = (tokens, index, ruleOptions, object, renderer) => {
+        let expressionString = tokens[index].content.trim();
+        if (settings.enable && settings.inlineCode.enable && expressionString.startsWith(settings.executionIndicator)) {
+            expressionString = expressionString.substring(settings.executionIndicator.length);
+            return `${renderFunction(expressionString, true)}`
+        } else
+            return renderDefault(tokens, index, ruleOptions, object, renderer, previousInlineCodeRenderer);
+    } //md.renderer.rules.code_inline
 
 }; //module.exports
