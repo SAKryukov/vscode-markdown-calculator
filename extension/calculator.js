@@ -62,7 +62,7 @@ module.exports = (md, settings, inlineKeyword) => {
             const consoleResults = consoleApi.render();
             if (value == undefined) value = "";
             const result = inline ?
-                value
+                `${consoleResults}${value}`
                 :
                 `${consoleResults}<p class="${settings.cssClass.return}">${value}</p>`
             return(result);
