@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = (md, settings) => {
+module.exports = (md, settings, inlineKeyword) => {
 
     const setReadonly = target => {
         const readonlyHandler = { set(obj, prop, value) { return false; } };
@@ -46,12 +46,11 @@ module.exports = (md, settings) => {
     const console = consoleApi.initialize();
 
     const safeFunctionBody = (body, inline) => {
-        const inlinePrefix = inline ? "\nreturn ": "\n";
         const safeGlobals =
             "const document = null," +
             "window = null, navigator = null," +
             "globalThis = {console: console};";
-        return `${safeGlobals}${inlinePrefix}${body}`;
+        return `${safeGlobals}\n${body}`;
     }; //safeFunctionBody
 
     const renderFunction = (body, inline) => {
@@ -90,10 +89,9 @@ module.exports = (md, settings) => {
     const previousInlineCodeRenderer = md.renderer.rules.code_inline;
     md.renderer.rules.code_inline = (tokens, index, ruleOptions, object, renderer) => {
         let expressionString = tokens[index].content.trim();
-        if (settings.enable && settings.inlineCode.enable && expressionString.startsWith(settings.executionIndicator)) {
-            expressionString = expressionString.substring(settings.executionIndicator.length);
-            return `${renderFunction(expressionString, true)}`
-        } else
+        if (settings.enable && settings.inlineCode.enable && expressionString.startsWith(`${inlineKeyword} `))
+            return `${renderFunction(expressionString, true)}`;
+        else
             return renderDefault(tokens, index, ruleOptions, object, renderer, previousInlineCodeRenderer);
     } //md.renderer.rules.code_inline
 

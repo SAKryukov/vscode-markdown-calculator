@@ -2,6 +2,8 @@
 
 exports.activate = context => {
 
+    const inlineKeyword = "return";
+    
     const debugActivationException = false;
     const extensionManifestFileName = "package.json";
     const markdownId = "markdown";
@@ -44,10 +46,10 @@ exports.activate = context => {
     }; //getVSCodeRange
 
     const getAllMatches = (document, text, isBlock) => {
-        const length = lazy.settings.executionIndicator.length;
+        const length = isBlock ? lazy.settings.executionIndicator.length : inlineKeyword.length;
         const prefix = isBlock ? "^(`{3,}|~{3,})[\\s]*" : "(`[\\s]*)";
-        const regex =
-            new RegExp(`${prefix}(${lazy.settings.executionIndicator})`, "mgi") 
+        const indicator = isBlock ? lazy.settings.executionIndicator : inlineKeyword;
+        const regex = new RegExp(`${prefix}(${indicator})`, "mgi"); 
         const list = [];
         let result;
         while (result = regex.exec(text))
@@ -106,12 +108,7 @@ exports.activate = context => {
                 if (!lazy.settings)
                     lazy.settings = getSettings();
                 const md = baseImplementation;
-                if (lazy.settings.enable) {
-                    if (lazy.settings.fencedCodeBlock.enable)
-                        md.use(calculator, lazy.settings);
-                    if (lazy.settings.inlineCode.enable)
-                        ;
-                } //if
+                md.use(calculator, lazy.settings, inlineKeyword);
                 return md;
             } catch (ex) {
                 activationExceptionHandler(ex);
