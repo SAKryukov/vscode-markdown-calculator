@@ -1,7 +1,7 @@
 # Visual Studio Code extension: Markdown Calculator
 
 Put the keyword (by default, "run") on the same line as the opening fence indicator.
-It will force the fenced code to execute instead of rendering it:
+It will force the *fenced code block* to execute instead of rendering it:
 
 ````
 ~~~~ run
