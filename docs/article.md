@@ -4,6 +4,11 @@
 
 {title}Markdown Calculator
 
+<!--
+Original publication:
+https://www.codeproject.com/Articles/5297157/Markdown-Calculator
+-->
+
 [*Sergey A Kryukov*](https://www.SAKryukov.org){.author}
 
 This is just a funny Visual Studio Code extension, but... what can happen if somebody will try to use it seriously?
