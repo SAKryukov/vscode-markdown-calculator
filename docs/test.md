@@ -10,6 +10,10 @@ In-document calculations:
    return x * y;
 ~~~~~~~~~~
 
+## Inline Code
+
+Inline code `2 * 2` is shown as it is, but `return 2*2` is rendered as 4.
+
 ### Calculate More
 
 ``` run

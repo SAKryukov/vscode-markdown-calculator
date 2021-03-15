@@ -1,6 +1,13 @@
 {
+    "markdown.preview.scrollEditorWithPreview": false,
+    "markdown.preview.scrollPreviewWithEditor": false,
+    "editor.minimap.enabled": false,
     "markdown.styles": [
         "style.css"
     ],
-    "markdown.calculator.cssClass.exception": "calculator-exception"
+    "markdown.calculator.cssClass.exception": "calculator-exception",
+    "cSpell.words": [
+        "mebikiss",
+        "megakiss"
+    ]
 }
