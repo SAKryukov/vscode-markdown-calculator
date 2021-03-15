@@ -35,11 +35,11 @@ SA???
 
 Let's say, on this sunny spring day, you are sending a love letter, and you want to send a million  kisses at the end of it. Of course, you need a well-formatted and maintainable document, so you use Visual Studio Code with Markdown.
 
-Naturally, as an advanced engineer, you are not supposed to remember constants and not supposed to do anything manually. Naturally, you would prefer writing something like `10 ** 6` kisses. Or, if you are even more romantic than that, you want to send `1 << 20` kisses, that is, one *megakiss*, or, speaking more accurately, one *mebikiss*.
+Naturally, as an advanced engineer, you are not supposed to remember constants and not supposed to do anything manually. Naturally, you would prefer writing something like `10 ** 6` kisses. Or, if you are even more romantic than that, you want to send `1 << 20` kisses, that is, one *megakiss*, or, speaking more accurately, one *[mebikiss](https://en.wikipedia.org/wiki/ISO/IEC_80000#Units_of_the_ISO_and_IEC_80000_series)*.
 
 Suppose, however, that your beloved one is not so well-versed in computer languages, and even less accustomed to binary shifts. In this case, you want to write `10 ** 6` but render it in the output document as old good 1000000 kisses.
 
-You can do it by using the Markdown Calculator extension for VSCode and writing `return 1 << 20` kisses instead of `10 ** 6`.
+You can do it by using the Markdown Calculator extension for VSCode and writing `return 10 ** 6` kisses instead of `10 ** 6`.
 
 On the more mature stage of your relationship, you may need to check up your expenses and provide some proof of purchase. You can do in in VSCode using a *fenced code block* with a keyword "run" on first line:
 
