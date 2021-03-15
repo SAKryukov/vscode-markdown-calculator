@@ -93,6 +93,6 @@ module.exports = (md, settings, inlineKeyword) => {
             return `${renderFunction(expressionString, true)}`;
         else
             return renderDefault(tokens, index, ruleOptions, object, renderer, previousInlineCodeRenderer);
-    } //md.renderer.rules.code_inline
+    }; //md.renderer.rules.code_inline
 
 }; //module.exports

@@ -44,7 +44,7 @@
                     "default": true
                 },
                 "markdown.calculator.inlineCode.enable": {
-                    "description": "Enable modification of inline behavior with Markdown Calculator",
+                    "description": "Enable modification of inline code behavior with Markdown Calculator",
                     "type": "boolean",
                     "default": true
                 },
