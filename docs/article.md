@@ -20,7 +20,7 @@ It will force the fenced code to execute instead of rendering it. Put the keywor
 
 <ul class="download"><li><a href="5291705/Working/JavaScript-Playground.zip">Download source code — 23.4 KB</a></li></ul>
 
-![presentation.h](main.webp)
+![Sample](main.png)
 
 <blockquote id="epigraph" class="FQ"><div class="FQA">Epigraph:</div>
 <p><i>If you want to create something totally useless or ridiculous, take it very seriously.

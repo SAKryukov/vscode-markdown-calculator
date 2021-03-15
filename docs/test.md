@@ -1,4 +1,5 @@
 ## Calculate, not Show
+![Logo](logo.png)
 
 In-document calculations:
 
@@ -16,6 +17,8 @@ Inline code `2 * 2` is shown as it is, but `return 2*2` is rendered as 4.
 
 ### Calculate More
 
-``` run
+```
+
    console.log(Math.PI, Math.cos(Math.PI));
+
 ```
