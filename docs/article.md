@@ -50,24 +50,16 @@ On the more mature stage of your relationship, you may need to check up your exp
 
 ```{lang=Javascript}
 ~~~ run
-const tax = 0.16;
-let food = 0;
-const milk = 6.35; food += milk;
-const meat = 35.16; food += meat;
-const potato = 2 * 1.99; food += potato;
-const bread = 2 * 4.25; food += bread;
-const salad = 2 * 2.99; food += salad;
-const taxedFood = food + food * tax;
-const medicine = 434.99;
-console.log(`food: ${food}`);
-console.log(`medicine: ${medicine}`);
-console.log(`tax: ${tax*100}%`);
-console.log(`food with tax: ${taxedFood}`);
-console.log(`total: ${taxedFood + medicine}`);
+const eggs = 3.49, sourCream = 2.49, milk = 4.99
+const gel = 19.99, vitamines = 17.99
+const taxable = gel + vitamines
+const tax = taxable * 6.25 / 100
+const total = eggs + sourCream + milk + taxable + tax
+console.log(`Total: $${Math.round(total * 100) / 100}`);
 ~~~
 ```
 
-The extension will render it as a result of calculations, shown as the content of the console, created via `console.log`. However, `return` also can be used; it will be shown at the end.
+The extension will render it as a result of calculations, shown as the content of the console, created via `console.log`. In this is case, it will be `$51.32`. However, `return` also can be used; it will be shown at the end.
 
 You know that the lack of the `return` statement is the same as `return undefined`, and the object `undefined` is the only object rendered by this extension as an empty string, in contrast to `null`, which is rendered as "null".
 
