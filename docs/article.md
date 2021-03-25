@@ -18,7 +18,7 @@ It will force the fenced code to execute instead of rendering it. Put the keywor
 
 <!-- copy to CodeProject from here ------------------------------------------->
 
-<ul class="download"><li><a href="5291705/Working/JavaScript-Playground.zip">Download source code — 23.4 KB</a></li></ul>
+<ul class="download" id="image-top"><li><a href="5291705/Working/JavaScript-Playground.zip">Download source code — 23.4 KB</a></li></ul>
 
 ![Sample](main.png)
 
@@ -34,11 +34,19 @@ Only then you'll have a chance to succeed.</i></p>
 
 ## Motivation
 
-SA???
+These days, we can photograph using a cell phone, browse the Web using a refrigerator, and talk to our vacuum cleaner. Having said that, what can we use as a calculator? Probably, something as natural, first of all, some text editor.
+
+Something else? Yes, [another suitable tool would be a browser](https://github.com/SAKryukov/javascript-playground). But now, let's see what can we do with a text editor.
+
+Here, it would be a good time to say that people using computers usually don't have something useful to do the calculations. Indeed, how can we call a calculator a usual Windows or Linux application called "Calculator"? Obviously, the main purpose of such an application was to demonstrate how difficult life before computers was: a user had only a few digits on a tiny low-contrast black-and-white screen and had to press buttons, not really seeing what's going on. To make it even less convenient with the computer simulation, a user is forced to click on those buttons with a mouse.
+
+So, I present my extension to the very convenient feature-rich text editor, open-source cross-platform [Visual Studio Code](https://code.visualstudio.com). This extension based on [Markdown](https://en.wikipedia.org/wiki/Markdown) is closer to the natural way of doing calculations we know from our elementary school: take a piece of paper or a notebook and write some steps of the calculations line by line. We need to write those lines with numbers and arithmetic operators between the lines of the normal text when we write what we do: what's given, what steps we do, and what is are the final results.
+
+Let's see how we can do it.
 
 ## Usage
 
-Let's say, on this sunny spring day, you are sending a love letter, and you want to send a million  kisses at the end of it. Of course, you need a well-formatted and maintainable document, so you use Visual Studio Code with Markdown.
+Let's say, on this sunny spring day, you are sending a love letter, and you want to send a million  kisses at the end of it. Of course, you need a well-formatted and maintainable document, so you use [Visual Studio Code](https://code.visualstudio.com) with [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
 Naturally, as an advanced engineer, you are not supposed to remember constants and not supposed to do anything manually. You would strongly prefer writing something like `10 ** 6` kisses. Or, if you are even more romantic than that, you may want to send `1 << 20` kisses, that is, one *megakiss*, or, speaking more accurately, one *[mebikiss](https://en.wikipedia.org/wiki/ISO/IEC_80000#Units_of_the_ISO_and_IEC_80000_series)*.
 
@@ -48,7 +56,7 @@ You can do it by using the Markdown Calculator extension for VSCode and writing 
 
 On the more mature stage of your relationship, you may need to check up your expenses and provide some proof of purchase. You can do in in VSCode using a *fenced code block* with a keyword "run" on first line:
 
-```{lang=Javascript}
+```{lang=Javascript}{id=code-fenced-code-block}
 ~~~ run
 const eggs = 3.49, sourCream = 2.49, milk = 4.99
 const gel = 19.99, vitamines = 17.99
@@ -59,7 +67,7 @@ console.log(`Total: $${Math.round(total * 100) / 100}`);
 ~~~
 ```
 
-The extension will render it as a result of calculations, shown as the content of the console, created via `console.log`. In this is case, it will be `$51.32`. However, `return` also can be used; it will be shown at the end.
+The extension will render it as a result of calculations, shown as the content of the console, created via `console.log`. In this case, it will be `$51.32`. However, `return` also can be used; it will be shown at the end.
 
 You know that the lack of the `return` statement is the same as `return undefined`, and the object `undefined` is the only object rendered by this extension as an empty string, in contrast to `null`, which is rendered as "null".
 
@@ -90,6 +98,14 @@ The installed extension can be turned on or off in the user or workspace setting
 
 ### Console
 
+What is "console", anyway? First of all, this is a [JavaScript object with some API](https://developer.mozilla.org/en-US/docs/Web/API/console). Normally, we use some JavaScript API (again, Visual Studio Code is highly recommended), and it has a console for the developers. But we need something different.
+
+With Visual Studio Code, the standard way of writing the documentation is using [Markdown](https://en.wikipedia.org/wiki/Markdown), and the usual workflow is having the markdown code on left and a *preview* pane on left, where we can immediately see the rendered document --- see the [picture on top](#image-top). This is where we need to get the results of our calculations.
+
+Besides, Markdown can be rendered and saved in an HTML file; and it should render content in the same way. It can be done using the extension [Extensible Markdown](https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode). This is how this article was written.
+
+The example of using the function `console.log` is [shown above](#code-fenced-code-block).
+
 ## Implementation
 
 ### Execution of Fenced Code Block
@@ -111,7 +127,7 @@ md.renderer.rules.fence = (tokens, index, ruleOptions, object, renderer) =&gt; {
 
 ### Execution of Inline Code
 
-The case of inline code is very similar. The keyword is different: this is `return`, which is also a JavaScript keyword, so it cannot be modified via [settings](#heading-settings). Also, the second parameter in the call to `renderFunction` indicates that evaluation of inline expression is required.
+The case of inline code is very similar. The keyword is different: this is `return`, which is also a JavaScript keyword, so it cannot be modified via [settings](#heading-settings). Also, the second parameter in the call to `renderFunction` indicates that evaluation of an inline expression is required.
 
 ~~~ {lang=Javascript}
     const previousInlineCodeRenderer = md.renderer.rules.code_inline;
@@ -128,9 +144,9 @@ The case of inline code is very similar. The keyword is different: this is `retu
         };
 ~~~
 
-### Calculation and Console API
+### Calculations and Console API
 
-Calculation is based on the [`Function` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function).
+The calculations are based on the [`Function` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function).
 
 This is a pretty delicate matter, mostly due to the fact, that the VSCode environment is protected from malicious or careless code placed in a fenced code block or an inline code. This is described in detail in another article, *[JavaScript Playground](https://www.codeproject.com/Articles/5291705/JavaScript-Playground)*.
 
@@ -193,9 +209,9 @@ Only a part of `console` functions is implemented. See also [`console` object do
 
 ## What's Next?
 
-We have provided a natural way
+We have provided a natural way of doing calculations similar to the usual calculations on a piece of paper. What's next? Of course, it would be the calculations everyone performs in one's head, mental calculations.
 
-### Mental Calculation
+Here is the plan sketch of an appropriate algorithm:
 
 - Apply [some brain reading technique](https://en.wikipedia.org/wiki/Brain-reading#Human-machine_interfaces),
 - Parse a mental pattern read into a command,
@@ -205,3 +221,8 @@ We have provided a natural way
 - If it throws an exception, catch it and send back the negative stimulus in the form of an electric shock.
 
 ## Conclusions
+
+The inertia of thinking is a bad thing.
+
+Instead of mimicking outdated and limiting devices people used to use in the past, we need to look for rational and natural ways of doing simple things. Today this is the calculation in the document being edited, and the support of brain reading will come tomorrow. In any case, it will deserve a separate article --- just subscribe to the Code Project newsletter.
+
