@@ -46,6 +46,8 @@ Let's see how we can do it.
 
 ## Usage
 
+### Insights
+
 Let's say, on this sunny spring day, you are sending a love letter, and you want to send a million  kisses at the end of it. Of course, you need a well-formatted and maintainable document, so you use [Visual Studio Code](https://code.visualstudio.com) with [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
 Naturally, as an advanced engineer, you are not supposed to remember constants and not supposed to do anything manually. You would strongly prefer writing something like `10 ** 6` kisses. Or, if you are even more romantic than that, you may want to send `1 << 20` kisses, that is, one *megakiss*, or, speaking more accurately, one *[mebikiss](https://en.wikipedia.org/wiki/ISO/IEC_80000#Units_of_the_ISO_and_IEC_80000_series)*.
@@ -105,6 +107,23 @@ With Visual Studio Code, the standard way of writing the documentation is using 
 Besides, Markdown can be rendered and saved in an HTML file; and it should render content in the same way. It can be done using the extension [Extensible Markdown](https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode). This is how this article was written.
 
 The example of using the function `console.log` is [shown above](#code-fenced-code-block).
+
+### Console with an Inline Code
+
+At a first glance, it looks like it is impossible to use a console output for the inline code fragment because the content starts with the keyword return followed by a single expression. This is not true; using the console is possible. It all depends on what is that single expression. For example, this expression does the trick:
+
+~~~
+To use the console,
+`return {
+    a: console.log("return an undefined object property"),
+    nothing: undefined}.
+    nothing`.
+~~~
+
+It will render: `To use the console, return an undefined object property`.
+Without `.nothing`, it would also render `[object Object]` at the end.
+
+It works because the extension renders the return value for all objects, including `null`, but it does not render `undefined`. I intentionally designed it this way, as a tool used to silence the return values. It is especially useful for the fenced code blocks because the function with missing `return` actually returns `undefined`.
 
 ## Implementation
 
@@ -225,4 +244,3 @@ Here is the plan sketch of an appropriate algorithm:
 The inertia of thinking is a bad thing.
 
 Instead of mimicking outdated and limiting devices people used to use in the past, we need to look for rational and natural ways of doing simple things. Today this is the calculation in the document being edited, and the support of brain reading will come tomorrow. In any case, it will deserve a separate article --- just subscribe to the Code Project newsletter.
-
