@@ -73,7 +73,7 @@ The extension will render it as a result of calculations, shown as the content o
 
 You know that the lack of the `return` statement is the same as `return undefined`, and the object `undefined` is the only object rendered by this extension as an empty string, in contrast to `null`, which is rendered as "null".
 
-In all cases, and exceptions are caught and the exception message is rendered using a special CSS style.
+In all cases, all the exceptions are caught and the exception message is rendered using a special CSS style.
 
 You can do all this using just the VSCode preview. For more serious work, you may want to convert your document into HTML; and you can do it by using the extension "[Extensible Markdown](https://github.com/SAKryukov/vscode-extensible-markdown)" described in the article *[All in One Toolchain for Article Writing with Visual Studio Code](https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode)*.
 
@@ -124,6 +124,18 @@ It will render: `To use the console, return an undefined object property`.
 Without `.nothing`, it would also render `[object Object]` at the end.
 
 It works because the extension renders the return value for all objects, including `null`, but it does not render `undefined`. I intentionally designed it this way, as a tool used to silence the return values. It is especially useful for the fenced code blocks because the function with missing `return` actually returns `undefined`.
+
+### How to Try it Out?
+
+You don't need to install the extension to try it. You only need working Visual Studio Code.
+
+Open Visual Studio Code with the working directory of the root of the source code downloadable on this page and unpacked. It would be the directory where the main extension file "package.json" is located.
+
+Alternatively, you can start Visual Studio Code with the supplied *workspace* file "MarkdownCalculator.code-workspace".
+
+It will load the extension project. This project comes with "launch.json" designed to start another Visual Studio Code process with the extension loaded. To launch it, press F5.
+
+Enjoy!
 
 ## Implementation
 
