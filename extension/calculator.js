@@ -42,7 +42,7 @@ module.exports = (md, settings, inlineKeyword) => {
         clear: function() {
             this.lines.splice(0);
         },
-    }; //console
+    }; //consoleApi
     const console = consoleApi.initialize();
 
     const safeFunctionBody = (body, inline) => {
