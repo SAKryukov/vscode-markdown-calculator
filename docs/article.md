@@ -213,7 +213,7 @@ const consoleApi = {
             warn: (...args) =&gt; {
                 handleArguments(args, settings.cssClass.console.warn);
             },
-        }; //console
+        };
         return setReadonly(console);
     },
     render: function() {
@@ -232,7 +232,7 @@ const consoleApi = {
     clear: function() {
         this.lines.splice(0);
     },
-}; //console
+};
 const console = consoleApi.initialize();
 ~~~
 
