@@ -23,4 +23,4 @@ The `console` functions are supported. The keyword, syntactic decorators, and ou
 
 This extension can be combined with other markdown-it extensions. In particular, the rendered HTML can be saved using [Extensible Markdown](https://github.com/SAKryukov/vscode-extensible-markdown).
 
-[Original publication](https://www.codeproject.com/Articles/5297157/Markdown-Calculator) will be accessible on April 1st, 2021.
+Original publication: [https://www.codeproject.com/Articles/5297157/Markdown-Calculator](https://www.codeproject.com/Articles/5297157/Markdown-Calculator)

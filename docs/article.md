@@ -112,7 +112,7 @@ The example of using the function `console.log` is [shown above](#code-fenced-co
 
 At a first glance, it looks like it is impossible to use a console output for the inline code fragment because the content starts with the keyword return followed by a single expression. This is not true; using the console is possible. It all depends on what is that single expression. For example, this expression does the trick:
 
-~~~
+~~~ {lang=Markdown}
 To use the console,
 `return {
     a: console.log("return an undefined object property"),
