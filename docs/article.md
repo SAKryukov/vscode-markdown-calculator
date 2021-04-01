@@ -242,7 +242,7 @@ Only a part of `console` functions is implemented. See also [`console` object do
 
 We have provided a natural way of doing calculations similar to the usual calculations on a piece of paper. What's next? Of course, it would be the calculations everyone performs in one's head, mental calculations.
 
-Here is the plan sketch of an appropriate algorithm:
+Here is the sketch of an appropriate algorithm:
 
 - Apply [some brain reading technique](https://en.wikipedia.org/wiki/Brain-reading#Human-machine_interfaces),
 - Parse a mental pattern read into a command,
