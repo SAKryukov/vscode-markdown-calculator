@@ -1,0 +1,2 @@
+To publish:
+https://marketplace.visualstudio.com/manage/publishers/sakryukov
