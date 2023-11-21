@@ -12,7 +12,7 @@
     "icon": "images/logo.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/SAKryukov/vscode-extensible-markdown.git"
+        "url": "https://github.com/SAKryukov/vscode-markdown-calculator.git"
     },
     "engines": {
         "vscode": ">=1.40.2"
