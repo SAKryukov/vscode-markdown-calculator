@@ -2,8 +2,9 @@
     "name": "vscode-markdown-calculator",
     "displayName": "VSCode Markdown Calculator",
     "description": "Visual Studio Code extension: Markdown Calculator",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "publisher": "sakryukov",
+    "homepage": "http://www.SAKryukov.org",
     "author": {
         "name": "Sergey A Kryukov",
         "url": "http://www.SAKryukov.org"
