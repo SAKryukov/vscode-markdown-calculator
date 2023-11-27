@@ -1,0 +1,9 @@
+docs
+*.zip
+*.vsix
+.vscode
+*.code-workspace
+.git
+**/.gitignore
+**/*.svg
+
