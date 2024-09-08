@@ -85,22 +85,22 @@ exports.activate = context => {
     }; //updateDecorators
     updateDecorators();
 
-    vscode.workspace.onDidOpenTextDocument(textDocument => {
+    context.subscriptions.push(vscode.workspace.onDidOpenTextDocument(textDocument => {
         if (textDocument.languageId == markdownId)
             updateDecorators();
-    });
-    vscode.window.onDidChangeActiveTextEditor(e=> {
+    }));
+    context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(e=> {
         if (e.document && e.document.languageId == markdownId)
             updateDecorators();
-    }, null, context.subscriptions);
-    vscode.workspace.onDidChangeTextDocument(e => {
+    }, null, context.subscriptions));
+    context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(e => {
         if (e.document && e.document.languageId == markdownId)
             updateDecorators();
-    }); //vscode.workspace.onDidChangeTextDocument
-    vscode.workspace.onDidChangeConfiguration(e => {
+    })); //vscode.workspace.onDidChangeTextDocument
+    context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(_ => {
         lazy.settings = getSettings();
-        updateDecorators(); // it checks up active text editor and its document anyway
-    }); //vscode.workspace.onDidChangeConfiguration
+        updateDecorators()
+    })); //vscode.workspace.onDidChangeConfiguration
 
     return {
         extendMarkdownIt: baseImplementation => {
